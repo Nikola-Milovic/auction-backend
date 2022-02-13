@@ -1,10 +1,15 @@
-defmodule AuctionBackendGraphql.Schema.ItemQueries do
+defmodule AuctionBackendGraphQl.Schema.ItemQueries do
   use Absinthe.Schema.Notation
-  alias AuctionBackendGraphql.Resolver
+  alias AuctionBackendGraphQl.Resolvers
 
   object :item_queries do
     field :list_items, list_of(:item) do
-      resolve(&Resolver.Item.list_items/3)
+      arg(:limit, :integer)
+      resolve(&Resolvers.Item.list_items/3)
+    end
+
+    field :popular_items, list_of(:item) do
+      resolve(&Resolvers.Item.popular_items/3)
     end
   end
 end

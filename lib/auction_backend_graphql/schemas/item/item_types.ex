@@ -1,23 +1,23 @@
-defmodule AuctionBackendGraphql.Schema.ItemTypes do
+defmodule AuctionBackendGraphQl.Schema.ItemTypes do
   use Absinthe.Schema.Notation
 
   object :item do
     field :id, :id
     field :title, :string
     field :description, :string
-    field :ends_at, :date
+    field :ends_at, :date_time
   end
 
-  scalar :date do
+  scalar :date_time do
     parse(fn input ->
-      case Date.from_iso8601(input.value) do
-        {:ok, date} -> {:ok, date}
+      case DateTime.from_iso8601(input.value) do
+        {:ok, datetime, _} -> {:ok, datetime}
         _ -> :error
       end
     end)
 
     serialize(fn date ->
-      Date.to_iso8601(date)
+      DateTime.to_iso8601(date)
     end)
   end
 end
