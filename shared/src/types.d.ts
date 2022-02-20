@@ -9,19 +9,47 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  Date: any;
+  DateTime: any;
+};
+
+export type AuctionItemInput = {
+  description: Scalars['String'];
+  endsAt: Scalars['DateTime'];
+  title: Scalars['String'];
 };
 
 
 export type Item = {
   __typename?: 'Item';
   description?: Maybe<Scalars['String']>;
-  endsAt?: Maybe<Scalars['Date']>;
+  endsAt?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['ID']>;
   title?: Maybe<Scalars['String']>;
 };
 
+export type RootMutationType = {
+  __typename?: 'RootMutationType';
+  createAuctionItem?: Maybe<Item>;
+};
+
+
+export type RootMutationTypeCreateAuctionItemArgs = {
+  input: AuctionItemInput;
+};
+
 export type RootQueryType = {
   __typename?: 'RootQueryType';
+  itemDetails?: Maybe<Item>;
   listItems?: Maybe<Array<Maybe<Item>>>;
+  popularItems?: Maybe<Array<Maybe<Item>>>;
+};
+
+
+export type RootQueryTypeItemDetailsArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type RootQueryTypeListItemsArgs = {
+  limit?: Maybe<Scalars['Int']>;
 };

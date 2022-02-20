@@ -1,4 +1,4 @@
-defmodule AuctionBackend.Item do
+defmodule AuctionBackend.Items.Item do
   use Ecto.Schema
   import Ecto.Changeset
 

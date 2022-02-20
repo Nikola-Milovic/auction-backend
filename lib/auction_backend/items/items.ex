@@ -1,4 +1,4 @@
-defmodule AuctionBackend do
+defmodule AuctionBackend.Items do
   import Ecto.Query, only: [from: 2]
 
   @moduledoc """
@@ -28,7 +28,7 @@ defmodule AuctionBackend do
   end
 
   def get_item(id) do
-    @repo.get!(Item, id)
+    @repo.get(Item, id)
   end
 
   def get_item_by(attrs) do

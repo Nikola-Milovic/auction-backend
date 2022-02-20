@@ -17,12 +17,12 @@ defmodule AuctionBackendWeb.Router do
   scope "/graphql/v1" do
     pipe_through :graphql
 
-    forward "/", Absinthe.Plug, schema: AuctionBackendGraphQl.Schema
+    forward "/", Absinthe.Plug, schema: AuctionBackend.GraphQL.Schema
   end
 
   if Mix.env() == :dev do
     scope "/graphiql" do
-      forward "/", Absinthe.Plug.GraphiQL, schema: AuctionBackendGraphQl.Schema
+      forward "/", Absinthe.Plug.GraphiQL, schema: AuctionBackend.GraphQL.Schema
     end
   end
 

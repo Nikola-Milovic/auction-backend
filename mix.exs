@@ -44,7 +44,9 @@ defmodule AuctionBackend.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:absinthe_plug, "~> 1.5"},
-      {:cors_plug, "~> 2.0"}
+      {:cors_plug, "~> 2.0"},
+      {:comeonin_ecto_password, "~> 3.0"},
+      {:pbkdf2_elixir, "~> 1.0"},
     ]
   end
 

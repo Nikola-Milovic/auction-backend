@@ -1,8 +1,8 @@
-defmodule AuctionBackendGraphQl.Schema.ItemMutations do
+defmodule AuctionBackend.GraphQL.Schema.ItemMutations do
   use Absinthe.Schema.Notation
-  alias AuctionBackendGraphQl.Resolvers
+  alias AuctionBackend.GraphQL.Resolvers
 
-  input_object :menu_item_input do
+  input_object :auction_item_input do
     field :title, non_null(:string)
     field :description, non_null(:string)
     field :ends_at, non_null(:date_time)
@@ -10,7 +10,7 @@ defmodule AuctionBackendGraphQl.Schema.ItemMutations do
 
   object :item_mutations do
     field :create_auction_item, :item do
-      arg(:input, non_null(:menu_item_input))
+      arg(:input, non_null(:auction_item_input))
       resolve(&Resolvers.Item.create_item/3)
     end
   end
