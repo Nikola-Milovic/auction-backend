@@ -1,12 +1,18 @@
 defmodule AuctionBackend.Users do
   @moduledoc """
-  The Accounts context.
+  The Users context.
   """
 
   import Ecto.Query, warn: false
   alias AuctionBackend.Repo
   alias Comeonin.Ecto.Password
-  alias AuctionBackend.Accounts.User
+  alias AuctionBackend.Users.User
+
+  @repo AuctionBackend.Repo
+
+  def lookup(id) do
+    @repo.get(User, id)
+  end
 
   def authenticate(email, password) do
     user = Repo.get_by(User, email: email)

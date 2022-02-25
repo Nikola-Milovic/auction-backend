@@ -5,7 +5,8 @@ defmodule Factory do
     params = %{
       name: "Person #{int}",
       email: "fake-#{int}@example.com",
-      password: "super-secret"
+      password: "super-secret",
+      money: 1000
     }
 
     %AuctionBackend.Users.User{}

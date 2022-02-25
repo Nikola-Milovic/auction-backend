@@ -8,6 +8,7 @@ defmodule AuctionBackendWeb.Router do
   pipeline :graphql do
     plug :accepts, ["json"]
     plug CORSPlug
+    plug AuctionBackend.GraphQL.Plug.AuthContext
   end
 
   scope "/api", AuctionBackendWeb do
@@ -22,6 +23,8 @@ defmodule AuctionBackendWeb.Router do
 
   if Mix.env() == :dev do
     scope "/graphiql" do
+      pipe_through :graphql
+
       forward "/", Absinthe.Plug.GraphiQL, schema: AuctionBackend.GraphQL.Schema
     end
   end

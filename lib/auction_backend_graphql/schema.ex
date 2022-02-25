@@ -3,19 +3,19 @@ defmodule AuctionBackend.GraphQL.Schema do
 
   #alias AuctionBackend.GraphQL.Middleware.{SafeResolution, ErrorHandler}
 
-  import_types(__MODULE__.ItemTypes)
-  import_types(__MODULE__.ItemQueries)
-  import_types(__MODULE__.ItemMutations)
+  import_types(__MODULE__.AuctionTypes)
+  import_types(__MODULE__.AuctionQueries)
+  import_types(__MODULE__.AuctionMutations)
 
   import_types(__MODULE__.UserMutations)
   import_types(__MODULE__.UserTypes)
 
   query do
-    import_fields(:item_queries)
+    import_fields(:auction_queries)
   end
 
   mutation do
-    import_fields(:item_mutations)
+    import_fields(:auction_mutations)
     import_fields(:user_mutations)
   end
 

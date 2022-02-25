@@ -1,7 +1,7 @@
-defmodule AuctionBackend.GraphQL.Schema.ItemTypes do
+defmodule AuctionBackend.GraphQL.Schema.AuctionTypes do
   use Absinthe.Schema.Notation
 
-  object :item do
+  object :auction do
     field :id, :id
     field :title, :string
     field :description, :string

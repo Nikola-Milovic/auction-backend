@@ -1,11 +1,13 @@
-defmodule AuctionBackend.Items.Item do
+defmodule AuctionBackend.Auctions.Auction do
   use Ecto.Schema
   import Ecto.Changeset
+  alias AuctionBackend.Users.User
 
-  schema "items" do
+  schema "auctions" do
     field :title, :string
     field :description, :string
     field :ends_at, :utc_datetime
+    belongs_to :user, User
     timestamps()
   end
 

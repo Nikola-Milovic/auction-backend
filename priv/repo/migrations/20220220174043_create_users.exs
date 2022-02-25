@@ -3,10 +3,10 @@ defmodule AuctionBackend.Repo.Migrations.CreateUsers do
 
   def change do
     create table(:users) do
-      add :name, :string
-      add :email, :string
-      add :password, :string
-      add :money, :integer
+      add :name, :string, null: false
+      add :email, :string, null: false
+      add :password, :string, null: false
+      add :money, :integer, default: 1000
 
       timestamps()
     end

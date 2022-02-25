@@ -1,4 +1,4 @@
-defmodule AuctionBackend.Items do
+defmodule AuctionBackend.Auctions do
   import Ecto.Query, only: [from: 2]
 
   @moduledoc """
@@ -9,13 +9,13 @@ defmodule AuctionBackend.Items do
   if it comes from the database, an external API or others.
   """
 
-  alias AuctionBackend.Item
+  alias AuctionBackend.Auctions.Auction
 
   @repo AuctionBackend.Repo
 
-  def list_items(args) do
+  def list_auctions(args) do
     args
-    |> Enum.reduce(Item, fn
+    |> Enum.reduce(Auction, fn
       {_, nil}, query ->
         query
 
@@ -27,25 +27,25 @@ defmodule AuctionBackend.Items do
     |> @repo.all
   end
 
-  def get_item(id) do
-    @repo.get(Item, id)
+  def get_auction(id) do
+    @repo.get(Auction, id)
   end
 
-  def get_item_by(attrs) do
-    @repo.get_by(Item, attrs)
+  def get_auction_by(attrs) do
+    @repo.get_by(Auction, attrs)
   end
 
-  def insert_item(attrs) do
-    %AuctionBackend.Item{}
-    |> Item.changeset(attrs)
+  def insert_auction(attrs) do
+    %Auction{}
+    |> Auction.changeset(attrs)
     |> @repo.insert()
   end
 
-  def delete_item(%AuctionBackend.Item{} = item), do: @repo.delete(item)
+  def delete_auction(%Auction{} = auction), do: @repo.delete(auction)
 
-  def update_item(%AuctionBackend.Item{} = item, updates) do
-    item
-    |> Item.changeset(updates)
+  def update_auction(%Auction{} = auction, updates) do
+    auction
+    |> Auction.changeset(updates)
     |> @repo.update()
   end
 end
