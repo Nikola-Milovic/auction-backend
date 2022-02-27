@@ -1,4 +1,6 @@
 defmodule Factory do
+  alias AuctionBackend.{Repo, Auctions, Users}
+
   def create_user() do
     int = :erlang.unique_integer([:positive, :monotonic])
 
@@ -9,8 +11,59 @@ defmodule Factory do
       money: 1000
     }
 
-    %AuctionBackend.Users.User{}
-    |> AuctionBackend.Users.User.changeset(params)
-    |> AuctionBackend.Repo.insert!()
+    %Users.User{}
+    |> Users.User.changeset(params)
+    |> Repo.insert!()
+  end
+
+  def populate_user_auctions(user) do
+    {:ok, date} = Date.new(2022, 6, 5)
+    {:ok, time} = Time.new(5, 0, 0)
+
+    user
+    |> Ecto.build_assoc(:auctions, %{
+      title: "Title1",
+      description: "Description 1",
+      ends_at: Date.add(date, 3) |> DateTime.new!(time)
+    })
+    |> Auctions.Auction.changeset()
+    |> Repo.insert!()
+
+    user
+    |> Ecto.build_assoc(:auctions, %{
+      title: "Title2",
+      description: "Description 2",
+      ends_at: Date.add(date, 5) |> DateTime.new!(time)
+    })
+    |> Auctions.Auction.changeset()
+    |> Repo.insert!()
+
+    user
+    |> Ecto.build_assoc(:auctions, %{
+      title: "Title3",
+      description: "Description 3",
+      ends_at: Date.add(date, 7) |> DateTime.new!(time)
+    })
+    |> Auctions.Auction.changeset()
+    |> Repo.insert!()
+  end
+
+  def populate_user_auctions(user, amount) do
+    {:ok, date} = Date.new(2022, 6, 5)
+    {:ok, time} = Time.new(5, 0, 0)
+
+    1..amount
+    |> Enum.each(&create_auction(user, &1, date, time))
+  end
+
+  defp create_auction(user, id, date, time) do
+    user
+    |> Ecto.build_assoc(:auctions, %{
+      title: "Title" <> to_string(id),
+      description: "Description" <> to_string(id),
+      ends_at: Date.add(date, id * 2) |> DateTime.new!(time)
+    })
+    |> Auctions.Auction.changeset()
+    |> Repo.insert()
   end
 end

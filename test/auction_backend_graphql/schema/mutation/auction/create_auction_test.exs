@@ -57,7 +57,7 @@ defmodule AuctionBackend.GraphQL.Schema.Mutation.CreateAuctionTest do
       endsAt: "2023-03-03T03:00:00.000Z"
     }
 
-    user = Factory.create_user()
+    Factory.create_user()
     conn = build_conn()
 
     response =

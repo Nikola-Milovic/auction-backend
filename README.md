@@ -1,4 +1,9 @@
-# AuctionBackend
+# Auction Backend
+
+A pet project to play around with Elixir, Phoenix, Absinthe, Postgres, Vue3 ... 
+
+The frontend for this project is [located here](https://github.com/Nikola-Milovic/auction-frontend) 
+
 
 To start your Phoenix server:
 
