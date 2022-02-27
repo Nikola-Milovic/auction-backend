@@ -1,6 +1,7 @@
 defmodule AuctionBackend.GraphQL.Schema.AuctionMutations do
   use Absinthe.Schema.Notation
   alias AuctionBackend.GraphQL.Resolvers
+  alias AuctionBackend.GraphQL.Middleware
 
   input_object :auction_input do
     field :title, non_null(:string)
@@ -11,7 +12,7 @@ defmodule AuctionBackend.GraphQL.Schema.AuctionMutations do
   object :auction_mutations do
     field :create_auction, :auction do
       arg(:input, non_null(:auction_input))
-
+      middleware(Middleware.Authorize)
       resolve(&Resolvers.Auction.create_auction/3)
     end
   end

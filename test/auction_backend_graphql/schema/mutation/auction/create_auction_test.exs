@@ -58,7 +58,7 @@ defmodule AuctionBackend.GraphQL.Schema.Mutation.CreateAuctionTest do
     }
 
     user = Factory.create_user()
-    conn = build_conn() |> auth_user(user)
+    conn = build_conn()
 
     response =
       post(conn, "/graphql/v1", %{
@@ -72,7 +72,7 @@ defmodule AuctionBackend.GraphQL.Schema.Mutation.CreateAuctionTest do
              "data" => %{"createAuction" => nil},
              "errors" => [
                %{
-                 "locations" => [%{"column" => 0, "line" => 2}],
+                 "locations" => [%{"column" => 3, "line" => 2}],
                  "message" => "unauthorized",
                  "path" => ["createAuction"]
                }
