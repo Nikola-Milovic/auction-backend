@@ -9,7 +9,7 @@ config :auction_backend, AuctionBackend.Repo,
   username: "postgres",
   password: "postgres",
   hostname: "localhost",
-  database: "auction_backend_test#{System.get_env("MIX_TEST_PARTITION")}",
+  database: "auction_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10
 

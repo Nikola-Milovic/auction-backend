@@ -27,6 +27,8 @@ defmodule AuctionBackend.GraphQL.Schema.Mutation.LoginTest do
              }
            } = json_response(response, 200)
 
+    # IO.inspect(response)
+
     assert %{"name" => user.name, "money" => user.money} == user_data
 
     assert {:ok, %{id: user.id}} ==

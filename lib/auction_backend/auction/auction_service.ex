@@ -1,4 +1,4 @@
-defmodule AuctionBackend.Auctions do
+defmodule AuctionBackend.Auctions.Service do
   import Ecto.Query, only: [from: 2]
 
   @moduledoc """
@@ -35,8 +35,9 @@ defmodule AuctionBackend.Auctions do
     @repo.get_by(Auction, attrs)
   end
 
-  def insert_auction(attrs) do
-    %Auction{}
+  def insert_auction(attrs, user) do
+    user
+    |> Ecto.build_assoc(:auctions)
     |> Auction.changeset(attrs)
     |> @repo.insert()
   end

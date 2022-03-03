@@ -3,6 +3,18 @@ defmodule AuctionBackend.GraphQL.Schema.AuctionTypes do
 
   object :auction do
     field :id, :id
+    field :user_id, :integer
+
+    field :user, :user do
+      resolve(fn auction, _, _ ->
+        user =
+          AuctionBackend.Users.User
+          |> AuctionBackend.Repo.get(auction.user_id)
+
+        {:ok, user}
+      end)
+    end
+
     field :title, :string
     field :description, :string
     field :ends_at, :date_time

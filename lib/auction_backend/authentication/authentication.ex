@@ -5,6 +5,7 @@ defmodule AuctionBackend.Authentication do
   end
 
   def verify(token) do
-    Phoenix.Token.verify(AuctionBackendWeb.Endpoint, @user_salt, token, max_age: 365 * 24 * 3600)
+    # TODO change max age
+    Phoenix.Token.verify(AuctionBackendWeb.Endpoint, @user_salt, token, max_age: 600)
   end
 end

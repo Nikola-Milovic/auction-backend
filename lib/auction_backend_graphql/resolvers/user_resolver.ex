@@ -1,8 +1,8 @@
 defmodule AuctionBackend.GraphQL.Resolvers.User do
-  alias AuctionBackend.Users
+  alias AuctionBackend.Users.Service
 
   def login(_, %{email: email, password: password}, _) do
-    case Users.authenticate(email, password) do
+    case Service.authenticate(email, password) do
       {:ok, user} ->
         token =
           AuctionBackend.Authentication.sign(%{
@@ -13,6 +13,15 @@ defmodule AuctionBackend.GraphQL.Resolvers.User do
 
       _ ->
         {:error, "incorrect email or password"}
+    end
+  end
+
+  def check_token(_, %{token: token}, _) do
+    with {:ok, %{id: id}} <- AuctionBackend.Authentication.verify(token),
+         user <- AuctionBackend.Users.Service.lookup(id) do
+      {:ok, user}
+    else
+      _ -> {:ok, nil}
     end
   end
 

@@ -13,6 +13,10 @@ defmodule AuctionBackend.GraphQL.Schema.Mutation.CreateAuctionTest do
       title
       description
       endsAt
+      user {
+        name
+        id
+      }
     }
   }
 
@@ -45,7 +49,8 @@ defmodule AuctionBackend.GraphQL.Schema.Mutation.CreateAuctionTest do
     assert %{
              "title" => input.title,
              "description" => input.description,
-             "endsAt" => "2023-03-03T03:00:00Z"
+             "endsAt" => "2023-03-03T03:00:00Z",
+             "user" => %{"name" => user.name, "id" => to_string(user.id)}
            } ==
              Map.drop(item_data, ["id"])
   end

@@ -1,11 +1,16 @@
 import Config
 
+config :cors_plug,
+  origin: ["http://localhost:3000"],
+  max_age: 86400,
+  methods: ["GET", "POST"]
+
 # Configure your database
 config :auction_backend, AuctionBackend.Repo,
   username: "postgres",
   password: "postgres",
   hostname: "localhost",
-  database: "auction_backend_dev",
+  database: "auction_dev",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
@@ -19,7 +24,7 @@ config :auction_backend, AuctionBackendWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   http: [ip: {127, 0, 0, 1}, port: 4000],
-  check_origin: false,
+  check_origin: true,
   code_reloader: true,
   debug_errors: true,
   secret_key_base: "fb9nE9NHO8lZ2E6y6dMy4fQj6//xvxrvZkGIoH88qOhEG/pw945hxvjry1uDgW8s",

@@ -7,6 +7,7 @@ defmodule AuctionBackend.GraphQL.Schema.UserTypes do
   end
 
   object :user do
+    field :id, :id
     field :email, :string
     field :name, :string
     field :money, :integer

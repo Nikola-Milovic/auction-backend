@@ -17,35 +17,7 @@ defmodule Factory do
   end
 
   def populate_user_auctions(user) do
-    {:ok, date} = Date.new(2022, 6, 5)
-    {:ok, time} = Time.new(5, 0, 0)
-
-    user
-    |> Ecto.build_assoc(:auctions, %{
-      title: "Title1",
-      description: "Description 1",
-      ends_at: Date.add(date, 3) |> DateTime.new!(time)
-    })
-    |> Auctions.Auction.changeset()
-    |> Repo.insert!()
-
-    user
-    |> Ecto.build_assoc(:auctions, %{
-      title: "Title2",
-      description: "Description 2",
-      ends_at: Date.add(date, 5) |> DateTime.new!(time)
-    })
-    |> Auctions.Auction.changeset()
-    |> Repo.insert!()
-
-    user
-    |> Ecto.build_assoc(:auctions, %{
-      title: "Title3",
-      description: "Description 3",
-      ends_at: Date.add(date, 7) |> DateTime.new!(time)
-    })
-    |> Auctions.Auction.changeset()
-    |> Repo.insert!()
+    populate_user_auctions(user, 3) 
   end
 
   def populate_user_auctions(user, amount) do

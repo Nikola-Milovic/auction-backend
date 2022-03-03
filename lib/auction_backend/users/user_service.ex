@@ -1,4 +1,4 @@
-defmodule AuctionBackend.Users do
+defmodule AuctionBackend.Users.Service do
   @moduledoc """
   The Users context.
   """
