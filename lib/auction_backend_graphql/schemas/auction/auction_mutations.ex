@@ -12,7 +12,7 @@ defmodule AuctionBackend.GraphQL.Schema.AuctionMutations do
   object :auction_mutations do
     field :create_auction, :auction do
       arg(:input, non_null(:auction_input))
-      middleware(Middleware.Authorize)
+      middleware(Middleware.RequireAuth)
       resolve(&Resolvers.Auction.create_auction/3)
     end
   end

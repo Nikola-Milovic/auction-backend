@@ -1,4 +1,4 @@
-defmodule AuctionBackend.GraphQL.Middleware.Authorize do
+defmodule AuctionBackend.GraphQL.Middleware.RequireAuth do
   @behaviour Absinthe.Middleware
 
   def call(resolution, _) do

@@ -1,5 +1,6 @@
 defmodule Factory do
   alias AuctionBackend.{Repo, Auctions, Users}
+  alias Ecto
 
   def create_user() do
     int = :erlang.unique_integer([:positive, :monotonic])
@@ -17,7 +18,7 @@ defmodule Factory do
   end
 
   def populate_user_auctions(user) do
-    populate_user_auctions(user, 3) 
+    populate_user_auctions(user, 3)
   end
 
   def populate_user_auctions(user, amount) do

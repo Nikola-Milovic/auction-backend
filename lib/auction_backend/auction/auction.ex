@@ -2,17 +2,19 @@ defmodule AuctionBackend.Auctions.Auction do
   use Ecto.Schema
   import Ecto.Changeset
   alias AuctionBackend.Users.User
+  alias AuctionBackend.Bids.Bid
 
   schema "auctions" do
     field :title, :string
     field :description, :string
     field :ends_at, :utc_datetime
     belongs_to :user, User
+    has_many :bids, Bid
     timestamps()
   end
 
-  def changeset(item, params \\ %{}) do
-    item
+  def changeset(auction, params \\ %{}) do
+    auction
     |> cast(params, [:title, :description, :ends_at])
     |> validate_required([:title, :description, :ends_at])
     |> validate_length(:title, min: 3)

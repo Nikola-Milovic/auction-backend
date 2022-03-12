@@ -5,11 +5,11 @@ defmodule AuctionBackend.GraphQL.Plug.Session do
 
   def call(conn, _) do
     check_if_auth(conn)
-    # |> IO.inspect()
+    #  |> IO.inspect()
   end
 
   defp check_if_auth(conn) do
-    with ["Bearer " <> token] <- get_req_header(conn, "authorization"),
+    with token <- conn.req_cookies["auction_auth_token"],
          {:ok, %{id: id}} <- AuctionBackend.Authentication.verify(token) do
       put_session(conn, :user_id, id)
     else

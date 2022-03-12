@@ -24,6 +24,15 @@ user =
   })
   |> Repo.insert!()
 
+user2 =
+  Users.User.changeset(%Users.User{}, %{
+    name: "Test user2",
+    email: "test2@gmail.com",
+    money: 1000,
+    password: "123qwe"
+  })
+  |> Repo.insert!()
+
 # user = AuctionBackend.Repo.get!(AuctionBackend.Users.User, 1)
 
 user
@@ -32,19 +41,17 @@ user
   description: "Description 1",
   ends_at: Date.add(date, 3) |> DateTime.new!(time)
 })
-|> Auctions.Auction.changeset
-|> Repo.insert!
+|> Auctions.Auction.changeset()
+|> Repo.insert!()
 
-
-user
+user2
 |> Ecto.build_assoc(:auctions, %{
   title: "Title2",
   description: "Description 2",
   ends_at: Date.add(date, 5) |> DateTime.new!(time)
 })
-|> Auctions.Auction.changeset
-|> Repo.insert!
-
+|> Auctions.Auction.changeset()
+|> Repo.insert!()
 
 user
 |> Ecto.build_assoc(:auctions, %{
@@ -52,5 +59,5 @@ user
   description: "Description 3",
   ends_at: Date.add(date, 7) |> DateTime.new!(time)
 })
-|> Auctions.Auction.changeset
-|> Repo.insert!
+|> Auctions.Auction.changeset()
+|> Repo.insert!()

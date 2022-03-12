@@ -3,7 +3,8 @@ defmodule AuctionBackend.GraphQL.Schema.Mutation.CreateAuctionTest do
 
   def auth_user(conn, user) do
     token = AuctionBackend.Authentication.sign(%{id: user.id})
-    put_req_header(conn, "authorization", "Bearer #{token}")
+    put_req_cookie(conn, "auction_auth_token", token)
+    #    put_req_header(conn, "authorization", "Bearer #{token}")
   end
 
   @query """

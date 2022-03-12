@@ -9,6 +9,7 @@ defmodule AuctionBackendWeb.Router do
   pipeline :graphql do
     plug :accepts, ["json"]
     plug :fetch_session
+    plug :fetch_cookies
     plug CORSPlug
     plug AuctionBackend.GraphQL.Plug.Session
     plug AuctionBackend.GraphQL.Plug.AuthContext
@@ -21,9 +22,8 @@ defmodule AuctionBackendWeb.Router do
   scope "/graphql/v1" do
     pipe_through :graphql
 
-    forward "/", Absinthe.Plug,
-      schema: AuctionBackend.GraphQL.Schema
-     # before_send: {AuctionBackend.GraphQL.Plug.AuthContext, :absinthe_before_send}
+    forward "/", Absinthe.Plug, schema: AuctionBackend.GraphQL.Schema
+    # before_send: {AuctionBackend.GraphQL.Plug.AuthContext, :absinthe_before_send}
   end
 
   if Mix.env() == :dev do
